@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ "/assets/css/style.css" | relative_url }}">
+    <title>{{ page.title }}</title>
+  </head>
+  <body>
+    <!-- Page content -->
+    {{ content }}
+
+    <hr />
+
+    <!-- Directory listing -->
+    <nav>
+      <h3>Files</h3>
+      <ul>
+        <!-- Markdown / pages -->
+        {% for page in site.html_pages %}
+          <li>
+            <a href="{{ page.url | relative_url }}">
+              {{ page.path }}
+            </a>
+          </li>
+        {% endfor %}
+
+        <!-- Static files (JS, CSS, images, etc.) -->
+        {% for file in site.static_files %}
+          <li>
+            <a href="{{ file.path | relative_url }}">
+              {{ file.path }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+  </body>
+</html>
