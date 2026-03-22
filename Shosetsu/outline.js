@@ -2,7 +2,6 @@
   "use strict";
   /**
    * Whether overlay should be pinned to top of the page when script starts
-   * When true may cause layout shifts on first long-press.
    * Defaults to presence of `data-start-open` flag on script tag.
    */
   let startOpen =
@@ -18,6 +17,10 @@
   const OVERLAY_OFFSET = 200;
 
   document.addEventListener("DOMContentLoaded", () => {
+    const placeholder = document.createElement("div");
+    placeholder.style.height = startOpen ? "60px" : "0";
+    document.body.prepend(placeholder);
+
     const overlay = document.createElement("div");
     Object.assign(overlay.style, {
       display: startOpen ? "block" : "none",
@@ -28,7 +31,7 @@
       top: "0",
       zIndex: "9999",
     });
-    document.body.prepend(overlay);
+    placeholder.appendChild(overlay);
 
     const timeline = document.createElement("div");
     Object.assign(timeline.style, {
